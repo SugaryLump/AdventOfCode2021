@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 
 namespace AdventOfCode
 {
@@ -10,16 +10,24 @@ namespace AdventOfCode
         static void Main(string[] args)
         {
             int day = 0;
+            Stopwatch watch = new Stopwatch();
             while (day != -1)
             {
-                Console.WriteLine("Seleciona o dia do problema. '-1' para sair.");
+                Console.WriteLine("+________________________________________+\n" +
+                                  "|Select advent problem day. '-1' to exit.|\n" +
+                                  "+________________________________________+");
+                Console.Write("> ");
                 String input = Console.ReadLine();
-
                 while (!int.TryParse(input, out day))
                     int.TryParse(input, out day);
 
+                bool failed = false;
+                watch.Start();
                 switch (day)
                 {
+                    case -1:
+                        failed = true;
+                        break;
                     case 1:
                         Day1();
                         break;
@@ -29,7 +37,15 @@ namespace AdventOfCode
                     case 3:
                         Day3();
                         break;
+                    default:
+                        Console.WriteLine("Not a valid day.");
+                        failed = true;
+                        break;
                 }
+                watch.Stop();
+                if (!failed)
+                    Console.WriteLine("(Exec. time = " + watch.ElapsedMilliseconds + " ms)");
+                watch.Reset();
             }
         }
 
@@ -106,11 +122,11 @@ namespace AdventOfCode
 
             Console.WriteLine("Submarine Coordinates: " +
                               "(" + horizontalPosition + ", " + fakeDepthOrAim + ")" +
-                              "\n X * Y = " + (horizontalPosition * fakeDepthOrAim) +
-                              "\n Wait, the manual was backwards? Here we go again!\n" +
+                              "\nX * Y = " + (horizontalPosition * fakeDepthOrAim) +
+                              "\nWait, the manual was backwards? Here we go again!\n" +
                               "Submarine Coordinates: " +
                               "(" + horizontalPosition + ", " + realDepth + ")" +
-                              "\n X * Y = " + (horizontalPosition * realDepth));
+                              "\nX * Y = " + (horizontalPosition * realDepth));
 
             reader.Close();
             fileStream.Close();
