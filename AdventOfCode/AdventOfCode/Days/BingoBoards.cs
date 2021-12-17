@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AdventOfCode
+namespace AdventOfCode.Days
 {
     class BingoBoards
     {
