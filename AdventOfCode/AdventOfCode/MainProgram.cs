@@ -50,6 +50,9 @@ namespace AdventOfCode
                     case 7:
                         Day7.run();
                         break;
+                    case 8:
+                        Day8.run();
+                        break;
                     default:
                         Console.WriteLine("Not a valid day.");
                         failed = true;
